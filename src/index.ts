@@ -18,7 +18,7 @@ const README_TEXT = fs
   .replace('%%BASE_URL%%', process.env.BASE_URL || '(PLEASE SET BASE_URL)')
 
 const app = express()
-const port = 3000
+const port = process.env.PORT || 3000
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*')
