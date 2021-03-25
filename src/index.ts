@@ -25,7 +25,10 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
   res.header('Access-Control-Allow-Methods', 'GET')
   res.header('Access-Control-Max-Age', '86400')
-  res.header('Cache-Control', `public, max-age=60, stale-if-error=600, stale-while-revalidate=120`)
+  // Cache for 15 mins
+  // Serve old version on an error for up to 6 hrs
+  // Serve old version while revalidating for up to 2 mins
+  res.header('Cache-Control', `public, max-age=${60 * 15}, stale-if-error=${60 * 60 * 6}, stale-while-revalidate=${60 * 2}`)
   next()
 })
 
