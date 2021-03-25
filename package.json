@@ -31,7 +31,8 @@
     "prettier": "^2.2.1",
     "ts-essentials": "^7.0.1",
     "tsc-watch": "^4.2.9",
-    "typescript": "^4.2.3"
+    "typescript": "^4.2.3",
+    "pm2": "^4.5.5"
   },
   "scripts": {
     "build": "cross-env tsc",
@@ -39,6 +40,11 @@
     "copy-files": "cross-env copyfiles -u 1 \"src/**/*.txt\" dist && cross-env copyfiles -u 1 \"src/*.txt\" dist",
     "dev": "cross-env tsc-watch --onSuccess \"yarn run postbuild\"",
     "start": "cd dist && cross-env nodemon -w ./ index.js",
-    "format": "cross-env prettier --write \"**/*.{ts,tsx,js,jsx,json}\""
+    "format": "cross-env prettier --write \"**/*.{ts,tsx,js,jsx,json}\"",
+    "pm2:watch": "cd dist && pm2 start ecosystem.config.js -- --color",
+    "pm2:stop": "cd dist && pm2 stop ecosystem.config.js",
+    "pm2:status": "pm2 status",
+    "pm2:monitor": "pm2 monit",
+    "pm2:logs": "pm2 logs \"Flarum Badge API\""
   }
 }
