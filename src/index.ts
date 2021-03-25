@@ -15,7 +15,7 @@ dotenv.config({
 const README_TEXT = fs
   .readFileSync('./readme.txt')
   .toString()
-  .replace('%%BASE_URL%%', process.env.BASE_URL || '(PLEASE SET BASE_URL)')
+  .replace(/%%BASE_URL%%/g, process.env.BASE_URL || '(PLEASE SET BASE_URL)')
 
 const app = express()
 const port = process.env.PORT || 3000
