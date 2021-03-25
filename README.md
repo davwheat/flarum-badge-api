@@ -26,6 +26,20 @@ Example badge for `FoF/Formatting`:
 
 ## Installing and running
 
+Normal people don't need to do this. This is for development purposes only.
+
+1. Create a `.env` file:
+
+```
+# .env
+EXTIVERSE_TOKEN=<your Extiverse API token>
+BASE_URL=<URL to the API root (no trailing slash>
+PORT=<optional port to run on; defaults to 3000>
+```
+
+<!-- This is not a typo. It's a joke. -->
+2. Install deps && start the Express server:
+
 ```sh
 yarn
 
