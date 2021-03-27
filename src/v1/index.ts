@@ -2,6 +2,7 @@ import * as express from 'express'
 import fs from 'fs'
 
 import * as compatLatest from './compat-latest'
+import * as extIcon from './ext-icon'
 import * as clearCache from './super-secret-clear-cache'
 
 const README_TEXT = fs
@@ -16,5 +17,6 @@ export function SetUpEndpoints(app: express.Express) {
   })
 
   compatLatest.SetUpEndpoints(app)
+  extIcon.SetUpEndpoints(app)
   clearCache.SetUpEndpoints(app)
 }
