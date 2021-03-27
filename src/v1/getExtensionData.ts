@@ -43,8 +43,6 @@ export default async function getExtensionData(packageName: string): Promise<Ret
 
   const URL = `https://extiverse.com/api/v1/extensions/${encodeURIComponent(packageName.replace('/', '$'))}`
 
-  console.log(URL)
-
   const response = await fetch(URL, {
     headers: {
       Authorization: `Bearer ${process.env.EXTIVERSE_TOKEN}`,

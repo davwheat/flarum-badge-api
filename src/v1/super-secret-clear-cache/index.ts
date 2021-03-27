@@ -1,7 +1,6 @@
 import * as express from 'express'
 
 import getExtensionData, { ExtensionDataCache } from '../getExtensionData'
-import respondWithUrlContents from '../respondWithUrlContents'
 import createBadgeUrl from '../createBadgeUrl'
 import respondWithError from '../respondWithError'
 import countOccurrences from '../countOccurrences'
@@ -22,7 +21,7 @@ export function SetUpEndpoints(app: express.Express) {
     } else if (packageName.toLowerCase() === 'flarum/core') {
       // 🥚 Easter egg 🥚
       const URL = createBadgeUrl('Supports latest Flarum', 'This is literally core...', { colorB: 'lightgrey' })
-      respondWithUrlContents(res, URL)
+      res.redirect(URL)
       return
     }
 
