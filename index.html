@@ -134,9 +134,19 @@
             <a href='{{{generator.url}}}'>
               {{{generator.name}}}
             </a>
-            {{{generator.version}}} - {{{generator.time}}}
+            {{{generator.version}}} -
+            <a href='{{{generator.url}}}'>
+              {{{generator.name}}}
+            </a>
           </div>
         {{/if}}
+      {{/if}}
+      {{#if vcs}}
+        <div class='content view-on-vcs'>
+          <a href='{{{vcs.url}}}'>
+            View this project on {{vcs.service}}
+          </a>
+        </div>
       {{/if}}
     </script>
 

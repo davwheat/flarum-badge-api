@@ -9,7 +9,11 @@ th,
 td {
   font-family: 'Mukta', sans-serif;
   font-weight: 400;
-  font-size: 15px;
+  font-size: 16px;
+}
+
+.view-on-vcs a {
+  font-size: 18px;
 }
 
 pre.prettyprint {
