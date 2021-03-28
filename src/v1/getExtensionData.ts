@@ -53,17 +53,7 @@ export default async function getExtensionData(packageName: string): Promise<Ret
     const data = (await response.json()) as ExtQueryResponse
 
     if (data.errors) {
-      if (data.errors[0].status === '404') {
-        return {
-          error: {
-            status: '404',
-            title: 'Not found',
-            detail: `No results found for "${packageName}". Make sure this matches your composer.json's name field.`,
-          },
-        }
-      } else {
-        return { error: data.errors[0] }
-      }
+      return { error: data.errors[0] }
     }
 
     // No upstream API errors!
@@ -73,11 +63,19 @@ export default async function getExtensionData(packageName: string): Promise<Ret
       data: data.data as Extension,
       wasCached: false,
     }
+  } else if (response.status === 404) {
+    return {
+      error: {
+        status: '404',
+        title: 'Not found',
+        detail: `No results found for "${packageName}". Make sure this matches your composer.json's name field.`,
+      },
+    }
   } else {
     return {
       error: {
         status: '500',
-        title: 'Unknown upstream API error',
+        title: `Unknown upstream API error (${response.status})`,
         detail: 'An unknown error occurred with the upstream API used to fetch extension data. Please try again later, or contact @MrJeeves#6969 on Discord.',
       },
     }
