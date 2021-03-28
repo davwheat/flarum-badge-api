@@ -3,7 +3,6 @@ import type { Extension } from '../extension'
 import * as express from 'express'
 
 import getExtensionData from '../getExtensionData'
-import createBadgeUrl from '../createBadgeUrl'
 import respondWithError from '../respondWithError'
 import countOccurrences from '../countOccurrences'
 
