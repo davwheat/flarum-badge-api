@@ -186,13 +186,13 @@ jobs:
       - name: Build docs
         run: |
           yarn docs
-          echo "docs.flarum-badge-api.davwheat.dev" | tee CNAME
+          echo -e "docs.flarum-badge-api.davwheat.dev" >> CNAME
 
       - name: Upload apiDoc build
         uses: actions/upload-artifact@v2
         with:
           name: Compiled website
-          path: public/
+          path: docs/
 
       - name: Deploy to GitHub Pages 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.0
