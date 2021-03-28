@@ -183,8 +183,10 @@ jobs:
           path: ./node_modules
           key: ${{ runner.os }}-node-modules-${{ github.sha }}-${{ hashFiles('**/yarn.lock') }}
 
-      - name: Lint using ESLint
-        run: yarn docs
+      - name: Build docs
+        run: |
+          yarn docs
+          echo "docs.flarum-badge-api.davwheat.dev" | tee CNAME
 
       - name: Upload apiDoc build
         uses: actions/upload-artifact@v2
