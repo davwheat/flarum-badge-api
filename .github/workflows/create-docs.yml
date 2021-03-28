@@ -186,7 +186,7 @@ jobs:
       - name: Build docs
         run: |
           yarn docs
-          echo -e "docs.flarum-badge-api.davwheat.dev" >> CNAME
+          echo -e "docs.flarum-badge-api.davwheat.dev" >> docs/CNAME
 
       - name: Upload apiDoc build
         uses: actions/upload-artifact@v2
