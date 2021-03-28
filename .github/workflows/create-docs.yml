@@ -1,0 +1,199 @@
+name: Generate docs
+
+on:
+  push:
+    branches:
+      - "main"
+  pull_request:
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    name: Prepare repo
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
+
+      - name: Restore dependencies cache
+        uses: actions/cache@v2
+        id: yarnCache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Restore node_modules
+        uses: actions/cache@v2
+        id: moduleCache
+        with:
+          path: ./node_modules
+          key: ${{ runner.os }}-node-modules-${{ github.sha }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-${{ github.sha }}-
+            ${{ runner.os }}-node-modules-
+
+      - name: Install dependencies on cache miss
+        run: yarn install --frozen-lockfile
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+
+      - name: Install project dependencies from cache
+        run: yarn --prefer-offline --frozen-lockfile
+        if: steps.yarn-cache.outputs.cache-hit == 'true'
+
+  # formatting:
+  #   runs-on: ubuntu-latest
+  #   needs: [install]
+  #   name: Verify formatting
+
+  #   strategy:
+  #     matrix:
+  #       node-version: [14.x]
+
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v2
+
+  #     - name: Use Node.js ${{ matrix.node-version }}
+  #       uses: actions/setup-node@v1
+  #       with:
+  #         node-version: ${{ matrix.node-version }}
+
+  #     - name: Restore dependencies cache
+  #       uses: actions/cache@v2
+  #       id: moduleCache
+  #       with:
+  #         path: ./node_modules
+  #         key: ${{ runner.os }}-node-modules-${{ github.sha }}-${{ hashFiles('**/yarn.lock') }}
+
+  #     - name: Verify formatting
+  #       run: yarn format:check
+
+  # test:
+  #   runs-on: ubuntu-latest
+  #   needs: [install]
+  #   name: Run tests
+
+  #   strategy:
+  #     matrix:
+  #       node-version: [14.x]
+
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v2
+
+  #     - name: Use Node.js ${{ matrix.node-version }}
+  #       uses: actions/setup-node@v1
+  #       with:
+  #         node-version: ${{ matrix.node-version }}
+
+  #     - name: Restore dependencies cache
+  #       uses: actions/cache@v2
+  #       id: moduleCache
+  #       with:
+  #         path: ./node_modules
+  #         key: ${{ runner.os }}-node-modules-${{ github.sha }}-${{ hashFiles('**/yarn.lock') }}
+
+  #     - name: Run tests
+  #       run: yarn test
+
+  #     - name: Upload coverage
+  #       # Run even if tests fail
+  #       if: always()
+  #       uses: codecov/codecov-action@v1
+  #       with:
+  #         directory: coverage
+
+  # lint:
+  #   runs-on: ubuntu-latest
+  #   needs: [build]
+  #   name: Lint
+
+  #   strategy:
+  #     matrix:
+  #       node-version: [14.x]
+
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v2
+
+  #     - name: Use Node.js ${{ matrix.node-version }}
+  #       uses: actions/setup-node@v1
+  #       with:
+  #         node-version: ${{ matrix.node-version }}
+
+  #     - name: Restore dependencies cache
+  #       uses: actions/cache@v2
+  #       id: moduleCache
+  #       with:
+  #         path: ./node_modules
+  #         key: ${{ runner.os }}-node-modules-${{ github.sha }}-${{ hashFiles('**/yarn.lock') }}
+
+  #     - name: Restore Gatsby cache
+  #       uses: actions/cache@v2
+  #       id: gatsbyCache
+  #       with:
+  #         path: ./.cache
+  #         key: ${{ runner.os }}-gatsby-cache-${{ github.sha }}-${{ hashFiles('**/yarn.lock') }}
+
+  #     - name: Lint using ESLint
+  #       run: yarn lint
+
+  deploy:
+    name: Deploy docs to production
+    runs-on: ubuntu-latest
+    needs: [install]
+
+    # Only deploy on push to main branch
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Restore dependencies cache
+        uses: actions/cache@v2
+        id: moduleCache
+        with:
+          path: ./node_modules
+          key: ${{ runner.os }}-node-modules-${{ github.sha }}-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Lint using ESLint
+        run: yarn docs
+
+      - name: Upload apiDoc build
+        uses: actions/upload-artifact@v2
+        with:
+          name: Compiled website
+          path: public/
+
+      - name: Deploy to GitHub Pages 🚀
+        uses: JamesIves/github-pages-deploy-action@4.1.0
+        with:
+          branch: prod
+          folder: docs
