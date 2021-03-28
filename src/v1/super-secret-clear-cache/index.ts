@@ -1,6 +1,6 @@
 import * as express from 'express'
 
-import getExtensionData, { ExtensionDataCache } from '../getExtensionData'
+import { ExtensionDataCache } from '../getExtensionData'
 import createBadgeUrl from '../createBadgeUrl'
 import respondWithError from '../respondWithError'
 import countOccurrences from '../countOccurrences'
