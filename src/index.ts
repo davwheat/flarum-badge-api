@@ -3,22 +3,17 @@ import fs from 'fs'
 import path from 'path'
 import compression from 'compression'
 import morgan from 'morgan'
-import dotenv from 'dotenv'
+import ENV from './env'
 
 import * as v1 from './v1'
-
-// load env data from .env
-dotenv.config({
-  path: '../.env',
-})
 
 const README_TEXT = fs
   .readFileSync('./readme.txt')
   .toString()
-  .replace(/%%BASE_URL%%/g, process.env.BASE_URL || '(PLEASE SET BASE_URL)')
+  .replace(/%%BASE_URL%%/g, ENV.BASE_URL || '(PLEASE SET BASE_URL)')
 
 const app = express()
-const port = process.env.PORT || 3000
+const port = ENV.PORT
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*')

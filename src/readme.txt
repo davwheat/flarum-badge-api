@@ -19,8 +19,9 @@ There are a few limitations:
 - your badge will be cached for 1 hour on users' browsers (they may not see any
   updates to your badge for up to an hour after you update your extension)
 
-- your badge will be cached on my server for up to 30 mins (noone may see an
-  update to your badge for up to 30 mins after you update your extension)
+- your badge will be cached on my server for up to 1 hour (noone may see an
+  update to your badge for up to 30 mins after you update your extension - this
+  is the same update rate as Extiverse itself)
 
 - this service relies on the Extiverse API, so we rely on them providing
   up-to-date info about extensions
