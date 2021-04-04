@@ -54,5 +54,6 @@ yarn start
 
 ```sh
 npm i -g pm2
+yarn build
 yarn pm2:watch
 ```
