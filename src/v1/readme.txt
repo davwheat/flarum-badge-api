@@ -1,30 +1,9 @@
 Hello!
 
-You can use this super-cool service to create a badge that shows if your
-Flarum ext is up-to-date and compatible with the latest version of Flarum.
+You can use this super-cool service to create lovely badges for your extension
+README files. The API also offers various other services, too.
 
-To use it, just fire a request to:
-
-%%BASE_URL%%/v1/compat-latest/:packageName
-
-For example:
-
-%%BASE_URL%%/v1/compat-latest/davwheat/custom-sidenav-links
-
-
--------------------------------------------------------------------------------
-
-There are a few limitations:
-
-- your badge will be cached for 1 hour on users' browsers (they may not see any
-  updates to your badge for up to an hour after you update your extension)
-
-- your badge will be cached on my server for up to 1 hour (noone may see an
-  update to your badge for up to 30 mins after you update your extension - this
-  is the same update rate as Extiverse itself)
-
-- this service relies on the Extiverse API, so we rely on them providing
-  up-to-date info about extensions
+For full documentation, see https://docs.flarum-badge-api.davwheat.dev
 
 -------------------------------------------------------------------------------
 

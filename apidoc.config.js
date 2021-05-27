@@ -1,6 +1,6 @@
 module.exports = {
   name: 'Flarum Badge API',
-  version: '1.0.0',
+  version: '1.1.0',
   description: 'A simple and free API for everything you need related to Flarum extensions.',
   title: 'Docs - Flarum Badge API',
   apidoc: {
