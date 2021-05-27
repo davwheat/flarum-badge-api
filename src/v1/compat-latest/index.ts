@@ -55,7 +55,7 @@ export function SetUpEndpoints(app: express.Express) {
    *
    *   An unknown error occurred with the upstream API used to fetch extension data. Please try again later, or contact @MrJeeves#6969 on Discord.
    *
-   * @apiSampleRequest v1/compat-latest/fof/formatting
+   * @apiSampleRequest /v1/compat-latest/fof/formatting
    */
   app.get('/v1/compat-latest/*', async (req, res) => {
     const packageName = req.params[0]
