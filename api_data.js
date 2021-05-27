@@ -57,7 +57,7 @@ define({ "api": [
     },
     "sampleRequest": [
       {
-        "url": "v1/compat-latest/fof/formatting"
+        "url": "/v1/compat-latest/fof/formatting"
       }
     ],
     "filename": "src/v1/compat-latest/index.ts",
