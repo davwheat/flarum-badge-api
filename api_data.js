@@ -50,7 +50,7 @@ define({ "api": [
         },
         {
           "title": "500 Upstream Extiverse API error",
-          "content": "Unknown upstream API error\n\nAn unknown error occurred with the upstream API used to fetch extension data. Please try again later, or contact @MrJeeves#6969 on Discord.",
+          "content": "Unknown upstream API error\n\nAn unknown error occurred with the upstream API used to fetch extension data. Please try again later, or contact @MrJeeves#1234 on Discord.",
           "type": "text"
         }
       ]
@@ -109,7 +109,7 @@ define({ "api": [
         },
         {
           "title": "500 Upstream Extiverse API error",
-          "content": "Unknown upstream API error\n\nAn unknown error occurred with the upstream API used to fetch extension data. Please try again later, or contact @MrJeeves#6969 on Discord.",
+          "content": "Unknown upstream API error\n\nAn unknown error occurred with the upstream API used to fetch extension data. Please try again later, or contact @MrJeeves#1234 on Discord.",
           "type": "text"
         }
       ]
