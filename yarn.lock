@@ -220,18 +220,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/express@npm:^4.17.13":
-  version: 4.17.13
-  resolution: "@types/express@npm:4.17.13"
-  dependencies:
-    "@types/body-parser": "*"
-    "@types/express-serve-static-core": ^4.17.18
-    "@types/qs": "*"
-    "@types/serve-static": "*"
-  checksum: 12a2a0e6c4b993fc0854bec665906788aea0d8ee4392389d7a98a5de1eefdd33c9e1e40a91f3afd274011119c506f7b4126acb97fae62ae20b654974d44cba12
-  languageName: node
-  linkType: hard
-
 "@types/keyv@npm:^3.1.1":
   version: 3.1.4
   resolution: "@types/keyv@npm:3.1.4"
@@ -1630,7 +1618,6 @@ __metadata:
   resolution: "flarum-support-badge-api@workspace:."
   dependencies:
     "@types/compression": ^1.7.2
-    "@types/express": ^4.17.13
     "@types/morgan": ^1.9.3
     "@types/node": ^15.14.9
     "@types/node-fetch": ^2.6.1

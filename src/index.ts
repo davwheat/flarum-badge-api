@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { RequestHandler } from 'express'
 import fs from 'fs'
 import path from 'path'
 import compression from 'compression'
@@ -32,13 +32,13 @@ app.set('etag', 'weak')
 app.use(
   express.urlencoded({
     extended: true,
-  }),
+  }) as RequestHandler
 )
 
 // Add gzip compression
 app.use(compression())
 
-app.use(morgan('dev'))
+app.use(morgan('dev') as RequestHandler)
 
 app.get('/', async (req, res) => {
   res.setHeader('Content-Type', 'text/plain')
