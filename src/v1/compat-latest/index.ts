@@ -53,7 +53,7 @@ export function SetUpEndpoints(app: express.Express) {
    * @apiErrorExample {text} 500 Upstream Extiverse API error
    *   Unknown upstream API error
    *
-   *   An unknown error occurred with the upstream API used to fetch extension data. Please try again later, or contact @MrJeeves#6969 on Discord.
+   *   An unknown error occurred with the upstream API used to fetch extension data. Please try again later, or contact @MrJeeves#1234 on Discord.
    *
    * @apiSampleRequest /v1/compat-latest/fof/formatting
    */
