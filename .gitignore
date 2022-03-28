@@ -5,3 +5,11 @@ dist
 tsconfig.tsbuildinfo
 .vscode
 docs/
+
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
