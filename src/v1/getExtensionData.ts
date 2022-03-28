@@ -76,7 +76,7 @@ export default async function getExtensionData(packageName: string): Promise<Ret
       error: {
         status: '500',
         title: `Unknown upstream API error (${response.status})`,
-        detail: 'An unknown error occurred with the upstream API used to fetch extension data. Please try again later, or contact @MrJeeves#6969 on Discord.',
+        detail: 'An unknown error occurred with the upstream API used to fetch extension data. Please try again later, or contact @MrJeeves#1234 on Discord.',
       },
     }
   }
